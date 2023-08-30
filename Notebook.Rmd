@@ -1,0 +1,112 @@
+---
+title: "Disease Ecology Notebook"
+output: html_notebook
+---
+Belsare Github <https://github.com/anyadoc>
+
+##############################################################################################################################################################################################
+
+## Week 2: Introduction and Basics
+
+gist.github W2 \## <https://gist.github.com/anyadoc/23d53b66e2e37b27bb74d444d676249c>
+
+##################################################### 
+
+To insert a code chunk, press Ctrl + Alt + I .
+
+To add an image use the following syntax: ![caption](path%20to%20image) ####################################################
+
+![Epidemiological Triad](W2_Intro/EpiTriad.png)
+
+Markdown Basics
+
+#### Heading 2
+
+### Heading 3
+
+## Heading 4
+
+*Italicized*
+_Italics_
+
+**Bold**
+__Bold__
+
+***Bold & Italics***
+
+```{r}
+# Example of Figure
+# Data = number of ticks found on dogs sampled from a shelter
+tickdata <-  c(0,0,0,0,1,0,6,0,3,3,5,22,0,0,3,33,4,2,1,23,7,2,4,6,78)
+hist(tickdata, breaks= 90)
+```
+
+
+
+
+
+
+
+
+################################################################################################################################################################################################
+
+## Week 3: Measures of Disease Frequency
+
+
+![Sample Size Table](W3_measures_disease_frequency/ss_table.png){width=80%}
+
+
+
+
+**Question 1: Find the sample size necessary to detect a disease at or above 5% prevalence in a herd of 5000 deer. The desired level of confidence is 95%**
+
+59 Deer
+
+
+
+**Question 2: Using a hypergeometric distribution, compare the sample size requirements for the following scenarios**
+
+*A. 95% confidence in detecting a disease at 1% prevalence in a large population*
+
+Sample Size = 299
+
+
+*B. 99% confidence in detecting a disease at 2% prevalence in a large population*
+
+Sample Size = 229
+
+
+
+
+**Question 3: Sampled 300 deer from a high fenced facility that has a herd of 4000. None of the 300 have antibodies against Epizootic Hemorrhagic Disease**
+
+I am 95% confidence that the prevalence of exposure to EHD in this facility is less than 1%.
+
+
+
+**Question 4:'lame disease' outbreak in Wild Turkeys of Alabama**
+
+A. Stern's Method (95%) confidence
+
+*Chambers County*
+
+Prevalence = 0.267 (26.7%)      
+Lower CI = 0.131 (13.1%)
+Upper CI = 0.449 (44.9%)
+
+  *Lee County* 
+                                 
+Prevalence = 0.200 (20%)      
+Lower CI = 0.143 (14.3%)
+Upper CI = 0.273 (27.3%)
+  
+  *Russel County*
+
+Prevalence = 0.031 (3.1%)      
+Lower CI = 0.009 (0.09%)
+Upper CI = 0.087 (8.7%)
+
+B. Comparison of prevalence by Fisher's exact test
+     
+There is a significant difference in the prevalence of 'lame disease' between Lee, Chambers, and Russel counties (p<0.0001)
+

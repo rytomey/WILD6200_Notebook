@@ -1,12 +1,14 @@
 ---
 title: "Disease Ecology Notebook"
-output: html_notebook
----
+output:
+  html_document:
+    df_print: paged
+ --- 
 Belsare Github <https://github.com/anyadoc>
 
 ##############################################################################################################################################################################################
 
-## Week 2: Introduction and Basics
+### Week 2: Introduction and Basics
 
 gist.github W2 \## <https://gist.github.com/anyadoc/23d53b66e2e37b27bb74d444d676249c>
 
@@ -19,6 +21,8 @@ To add an image use the following syntax: ![caption](path%20to%20image) ########
 ![Epidemiological Triad](W2_Intro/EpiTriad.png)
 
 Markdown Basics
+
+*to get rid of blinking cursor click INSERT*
 
 #### Heading 2
 
@@ -34,6 +38,7 @@ __Bold__
 
 ***Bold & Italics***
 
+
 ```{r}
 # Example of Figure
 # Data = number of ticks found on dogs sampled from a shelter
@@ -47,10 +52,10 @@ hist(tickdata, breaks= 90)
 
 
 
+ --- 
+#############################################################################################################################################################################################
 
-################################################################################################################################################################################################
-
-## Week 3: Measures of Disease Frequency
+### Week 3: Measures of Disease Frequency
 
 
 ![Sample Size Table](W3_measures_disease_frequency/ss_table.png){width=80%}
@@ -110,9 +115,11 @@ B. Comparison of prevalence by Fisher's exact test
      
 There is a significant difference in the prevalence of 'lame disease' between Lee, Chambers, and Russel counties (p<0.0001)
 
-################################################################################################################################################################################################
 
-## Week 5: SIR MODELS
+ --- 
+##############################################################################################################################################################################################
+
+### Week 5: SIR MODELS
 
 
 
@@ -163,10 +170,10 @@ matplot(x = times, y = out, type = "l",
 legend(240, 0.7, c("Susceptible", "Infected", "Recovered", "Total"), pch = 1, col = 1:4, bty = "n")
 
 ```
+ --- 
+##############################################################################################################################################################################################
 
-################################################################################################################################################################################################
-
-## Week 6: SIR E.G. CFBD - CONTAGIOUS FROG BULLYING DISEASE
+### Week 6: SIR E.G. CFBD - CONTAGIOUS FROG BULLYING DISEASE
 
 *Gamma = 1/21 = 0.0476*
 *R0 = 2 (average number of susceptible individuals infected by one individual)*
@@ -224,4 +231,35 @@ legend(240, 0.7, c("Susceptible", "Infected", "Recovered", "Total"), pch = 1, co
 _The SIR Model shows that over the time of disease occurrence in the population, the whole population is never infected. The susceptible population quickly declines, but plateaus when the infected proportion of the population is highest_
 
 
+ --- 
+##############################################################################################################################################################################################
+
+### Week 11: GENERATING DISEASE OCCURENCE MAPS 
+
+Ctrl + alt + i = CODE CHUNK
+https://www.cdc.gov/TICKS/LONGHORNED-TICK/
+REPORTED FIRST TIME IN US IN 2017 - FEMALE CAN LAY EGGS AND REPRODUCE WITHOUT MATING 
+**NATIONAL HAEMAPHYSALIS LONGCORNIS (ASIAN LONGHORN TICK) SITUATION REPORT**
+```{r}
+install.packages(ggplot2)
+library(ggplot2)
+install.packages(usmap)
+library(usmap)
+install.packages(dplyr)
+library(dplyr)
+
+
+alhdata <- us_map(regions = "states")
+alhdata
+states_found <- c("Virginia","West Virginia","North Carolina","New Jersey","Pennzylvania","New York","Maryland", "Tennessee","Kentucky","Ohio","Georgia","Connecticut", "Delaware","Missouri","South Carolina","Arkansas","Massachusetts","Rhode Island")
+alt_dist <- ggplot(alhdata, aes(x,y,group=group,fill=full%in%states_found))+
+  geom_polygon(color ='black')+
+  coord_equal()+
+  scale_fill_manual(values=c('white','firebrick'),guide ='none')+
+  usmap:::theme_map()+
+  labs(title= "Asian longhorned tick distribution in US states",subtitle="As of February 2023; https://www.cdc.gov/ticks/longhorned-tick/,") +
+  theme(panel.background = element_rect(color= "black", fill="gray"))
+alt_dist
+
+```
 

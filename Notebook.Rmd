@@ -251,7 +251,7 @@ library(dplyr)
 
 alhdata <- us_map(regions = "states")
 alhdata
-states_found <- c("Virginia","West Virginia","North Carolina","New Jersey","Pennzylvania","New York","Maryland", "Tennessee","Kentucky","Ohio","Georgia","Connecticut", "Delaware","Missouri","South Carolina","Arkansas","Massachusetts","Rhode Island")
+states_found <- c("Virginia","West Virginia","North Carolina","New Jersey","Pennsylvania","New York","Maryland", "Tennessee","Kentucky","Ohio","Georgia","Connecticut", "Delaware","Missouri","South Carolina","Arkansas","Massachusetts","Rhode Island")
 alt_dist <- ggplot(alhdata, aes(x,y,group=group,fill=full%in%states_found))+
   geom_polygon(color ='black')+
   coord_equal()+
@@ -261,5 +261,28 @@ alt_dist <- ggplot(alhdata, aes(x,y,group=group,fill=full%in%states_found))+
   theme(panel.background = element_rect(color= "black", fill="gray"))
 alt_dist
 
+```
+https://www.cdc.gov/heartland-virus/statistics/index.html
+**HEARTLAND VIRUS DISEASE**
+```{r}
+install.packages(ggplot2)
+library(ggplot2)
+install.packages(usmap)
+library(usmap)
+install.packages(dplyr)
+library(dplyr)
+
+
+alhdata2 <- us_map(regions = "states")
+alhdata2
+states_found2 <- c("Virginia","Arkansas","North Carolina","Iowa","Pennsylvania","New York","Indiana", "Tennessee","Kentucky","Oklahoma","Georgia","Illinois","Kansas","Missouri")
+alt_dist2 <- ggplot(alhdata2, aes(x,y,group=group,fill=full%in%states_found2))+
+  geom_polygon(color ='black')+
+  coord_equal()+
+  scale_fill_manual(values=c('white','orange'),guide ='none')+
+  usmap:::theme_map()+
+  labs(title= "Heartland Virus Disease Distribution in the US",subtitle="As of November 2022; https://www.cdc.gov/heartland-virus/statistics/index/,") +
+  theme(panel.background = element_rect(color= "black", fill="gray"))
+alt_dist2
 ```
 

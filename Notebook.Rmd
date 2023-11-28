@@ -237,6 +237,8 @@ _The SIR Model shows that over the time of disease occurrence in the population,
 ### Week 11: GENERATING DISEASE OCCURENCE MAPS 
 
 Ctrl + alt + i = CODE CHUNK
+
+## State-Level Maps
 https://www.cdc.gov/TICKS/LONGHORNED-TICK/
 REPORTED FIRST TIME IN US IN 2017 - FEMALE CAN LAY EGGS AND REPRODUCE WITHOUT MATING 
 **NATIONAL HAEMAPHYSALIS LONGCORNIS (ASIAN LONGHORN TICK) SITUATION REPORT**
@@ -284,5 +286,58 @@ alt_dist2 <- ggplot(alhdata2, aes(x,y,group=group,fill=full%in%states_found2))+
   labs(title= "Heartland Virus Disease Distribution in the US",subtitle="As of November 2022; https://www.cdc.gov/heartland-virus/statistics/index/,") +
   theme(panel.background = element_rect(color= "black", fill="gray"))
 alt_dist2
+```
+
+## County-Level Map
+```{r}
+library(tidyverse)
+library(mapproj)
+library(maps)
+
+cwd1<-read.csv("cwdcounties_fip.csv",header=TRUE)
+cwd<-cwd1[["fip"]]
+
+maps::county.fips %>%
+  as_tibble %>%
+  extract(polyname, c("region", "subregion"), "^([^,]+),([^,]+)$")->
+  dfips
+
+map_data("county") %>%
+  left_join(dfips)->
+  dall
+
+dall %>%
+  mutate(is_example=fips %in% cwd) %>%
+  ggplot(aes(long, lat, group=group))+
+  geom_polygon(aes(fill=is_example),color="gray70")+
+  coord_map()+
+  scale_fill_manual(values=c("TRUE"="red","FALSE"="gray90"))
+
+```
+
+
+```{r}
+library(tidyverse)
+library(mapproj)
+library(maps)
+
+lyme1<-read.csv("CountyLevel_Lyme_AL.csv",header=TRUE)
+lyme<-lyme1[["Cases2020"]]
+
+maps::county.fips %>%
+  as_tibble %>%
+  extract(polyname, c("region", "subregion"), "^([^,]+),([^,]+)$")->
+  dfips
+
+map_data("county") %>%
+  left_join(dfips)->
+  dall
+
+dall %>%
+  mutate(is_example=fips %in% cwd) %>%
+  ggplot(aes(long, lat, group=group))+
+  geom_polygon(aes(fill=is_example),color="gray70")+
+  coord_map()+
+  scale_fill_manual(values=c("TRUE"="red","FALSE"="gray90"))
 ```
 
